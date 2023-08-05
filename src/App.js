@@ -18,6 +18,12 @@ class App extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.theme !== this.state.theme) {
+      document.documentElement.setAttribute('data-theme', this.state.theme)
+    }
+  }
+
   render() {
     return (
       <ThemeProvider value={this.state}>
