@@ -7,9 +7,12 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      theme: 'light',
+      theme: localStorage.getItem('theme') || 'light',
       toggleTheme: () => {
         this.setState((prevState) => {
+          const newThemeValue = prevState.theme === 'light' ? 'dark' : 'light'
+          localStorage.setItem('theme', newThemeValue)
+
           return {
             theme: prevState.theme === 'light' ? 'dark' : 'light'
           }
@@ -18,7 +21,11 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidMount() {
+    document.documentElement.setAttribute('data-theme', this.state.theme)  // menerapkan tema berdasarkan nilai dari local storage saat laman dibuka pertama kalinya
+  }
+
+  componentDidUpdate(prevProps, prevState) {  // method lifecycle ini selalu dieksekusi setiap kali state mengalami perubahan
     if (prevState.theme !== this.state.theme) {
       document.documentElement.setAttribute('data-theme', this.state.theme)
     }
