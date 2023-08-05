@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
+import ToggleTheme from './components/ToggleTheme';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
     return (
       <ThemeProvider value={this.state}>
         <div className="container">
+          <ToggleTheme />
           <p>Hello, World</p>
         </div>
       </ThemeProvider>
